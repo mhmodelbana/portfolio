@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Name | Portfolio</title>
+<title>BANA | Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
@@ -40,6 +40,7 @@ nav{
     background:rgba(0,0,0,0.6);
     backdrop-filter:blur(10px);
     z-index:1000;
+    border-bottom:1px solid #222;
 }
 
 nav h2{
@@ -77,14 +78,18 @@ header{
     align-items:center;
     text-align:center;
     padding:0 20px;
+    background:linear-gradient(135deg,#0a0a0a,#1a1a1a);
 }
 
 header h1{
     font-size:64px;
     font-weight:800;
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeIn 1s forwards;
 }
 
-header span{
+header h1 span{
     color:var(--accent);
 }
 
@@ -92,6 +97,9 @@ header p{
     margin-top:20px;
     font-size:20px;
     color:var(--muted);
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeIn 1s 0.5s forwards;
 }
 
 .btn{
@@ -104,6 +112,9 @@ header p{
     cursor:pointer;
     border-radius:50px;
     transition:.4s;
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeIn 1s 1s forwards;
 }
 
 .btn:hover{
@@ -114,25 +125,32 @@ header p{
 
 /* Sections */
 section{
-    padding:120px 10%;
+    padding:100px 10%;
 }
 
 .section-title{
     font-size:38px;
     margin-bottom:60px;
     text-align:center;
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeIn 1s forwards;
 }
 
 .section-title span{
     color:var(--accent);
 }
 
+/* About */
 .about{
     max-width:800px;
     margin:auto;
     text-align:center;
     line-height:1.8;
     color:var(--muted);
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeIn 1s 0.5s forwards;
 }
 
 /* Skills */
@@ -149,6 +167,9 @@ section{
     border-radius:12px;
     transition:.4s;
     border:1px solid transparent;
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeIn 1s forwards;
 }
 
 .skill-card:hover{
@@ -171,6 +192,9 @@ section{
     width:300px;
     transition:.4s;
     border:1px solid transparent;
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeIn 1s forwards;
 }
 
 .project-card h3{
@@ -195,20 +219,6 @@ footer{
 }
 
 /* Animations */
-header h1, header p, .btn, .section-title, .about, .skill-card, .project-card{
-    opacity:0;
-    transform:translateY(30px);
-    animation:fadeIn 1s forwards;
-}
-
-header h1{animation-delay:.3s;}
-header p{animation-delay:.6s;}
-.btn{animation-delay:.9s;}
-.section-title{animation-delay:1.2s;}
-.about{animation-delay:1.5s;}
-.skill-card{animation-delay:1.8s;}
-.project-card{animation-delay:2s;}
-
 @keyframes fadeIn{
     to{
         opacity:1;
@@ -219,10 +229,27 @@ header p{animation-delay:.6s;}
 /* Responsive */
 @media(max-width:768px){
     header h1{
-        font-size:40px;
+        font-size:32px;
+    }
+    header p{
+        font-size:16px;
+    }
+    nav{
+        padding:15px 5%;
     }
     nav ul{
         display:none;
+    }
+    .skills, .projects{
+        flex-direction:column;
+        align-items:center;
+    }
+    .skill-card, .project-card{
+        width:90%;
+    }
+    .btn{
+        padding:12px 25px;
+        font-size:14px;
     }
 }
 </style>
@@ -231,60 +258,14 @@ header p{animation-delay:.6s;}
 <body>
 
 <nav>
-    <h2>Your<span>Name</span></h2>
+    <h2>BANA<span></span></h2>
     <ul>
         <li><a href="#">Home</a></li>
         <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
     </ul>
 </nav>
 
 <header>
-    <h1>Hi, I'm <span>Your Name</span></h1>
-    <p>AI Engineer • Full Stack Developer • Problem Solver</p>
-    <a href="#projects"><button class="btn">View My Work</button></a>
-</header>
-
-<section id="about">
-    <h2 class="section-title">About <span>Me</span></h2>
-    <p class="about">
-        I design and build intelligent systems that solve real-world problems.
-        My focus is on clean architecture, scalable solutions, and impactful technology.
-    </p>
-</section>
-
-<section id="skills">
-    <h2 class="section-title">Skills</h2>
-    <div class="skills">
-        <div class="skill-card">Python</div>
-        <div class="skill-card">Machine Learning</div>
-        <div class="skill-card">Flutter</div>
-        <div class="skill-card">Web Development</div>
-        <div class="skill-card">Data Analysis</div>
-    </div>
-</section>
-
-<section id="projects">
-    <h2 class="section-title">Selected <span>Projects</span></h2>
-    <div class="projects">
-        <div class="project-card">
-            <h3>Project One</h3>
-            <p>Short description about your project and its impact.</p>
-        </div>
-        <div class="project-card">
-            <h3>Project Two</h3>
-            <p>Short description about your project and its impact.</p>
-        </div>
-        <div class="project-card">
-            <h3>Project Three</h3>
-            <p>Short description about your project and its impact.</p>
-        </div>
-    </div>
-</section>
-
-<footer>
-    © 2026 Your Name — All Rights Reserved.
-</footer>
-
-</body>
-</html>
+    <
