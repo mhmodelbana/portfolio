@@ -9,306 +9,199 @@
 
 <style>
 :root{
-    --bg:#0a0a0a;
-    --card:#111;
-    --accent:#ff1f4d;
-    --text:#ffffff;
-    --muted:#aaaaaa;
+  --bg:#0a0a0a;
+  --card:#111;
+  --accent:#ff1f4d;
+  --text:#ffffff;
+  --muted:#aaaaaa;
 }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+body{background:var(--bg);color:var(--text);scroll-behavior:smooth;transition:0.4s;}
+.dark-mode{--bg:#0a0a0a;--card:#111;--text:#fff;--muted:#aaa;}
+.light-mode{--bg:#f4f4f4;--card:#fff;--text:#0a0a0a;--muted:#555;}
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Inter',sans-serif;
-}
-
-body{
-    background:var(--bg);
-    color:var(--text);
-    scroll-behavior:smooth;
-}
-
-/* Navbar */
 nav{
-    position:fixed;
-    width:100%;
-    top:0;
-    display:flex;
-    justify-content:space-between;
-    padding:20px 10%;
-    background:rgba(0,0,0,0.6);
-    backdrop-filter:blur(10px);
-    z-index:1000;
-    border-bottom:1px solid #222;
+  position:fixed;width:100%;top:0;display:flex;justify-content:space-between;
+  padding:20px 10%;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);z-index:1000;
+  border-bottom:1px solid #222;
 }
-
-nav h2{
-    font-weight:800;
-    letter-spacing:1px;
-}
-
-nav h2 span{
-    color:var(--accent);
-}
-
-nav ul{
-    list-style:none;
-    display:flex;
-    gap:30px;
-}
-
-nav a{
-    text-decoration:none;
-    color:var(--text);
-    font-weight:500;
-    transition:.3s;
-}
-
-nav a:hover{
-    color:var(--accent);
-}
+nav h2{font-weight:800;letter-spacing:1px;}
+nav h2 span{color:var(--accent);}
+nav ul{list-style:none;display:flex;gap:30px;}
+nav a{text-decoration:none;color:var(--text);font-weight:500;transition:.3s;}
+nav a:hover{color:var(--accent);}
+.toggle-btn{cursor:pointer;font-size:18px;border:none;background:none;color:var(--accent);}
 
 /* Hero */
-header{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:0 20px;
-}
-
-header h1{
-    font-size:64px;
-    font-weight:800;
-    opacity:0;
-    transform:translateY(30px);
-    animation:fadeIn 1s forwards;
-}
-
-header h1 span{
-    color:var(--accent);
-}
-
-header p{
-    margin-top:20px;
-    font-size:20px;
-    color:var(--muted);
-    opacity:0;
-    transform:translateY(30px);
-    animation:fadeIn 1s 0.5s forwards;
-}
-
-.btn{
-    margin-top:30px;
-    padding:14px 35px;
-    border:1px solid var(--accent);
-    background:transparent;
-    color:var(--accent);
-    font-size:15px;
-    cursor:pointer;
-    border-radius:50px;
-    transition:.4s;
-    opacity:0;
-    transform:translateY(30px);
-    animation:fadeIn 1s 0.9s forwards;
-}
-
-.btn:hover{
-    background:var(--accent);
-    color:#fff;
-    box-shadow:0 0 20px var(--accent);
-}
+header{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 20px;}
+header h1{font-size:64px;font-weight:800;margin-bottom:15px;}
+header h1 span{color:var(--accent);}
+header p{font-size:20px;color:var(--muted);}
+.btn{margin-top:30px;padding:14px 35px;border:1px solid var(--accent);background:transparent;color:var(--accent);
+border-radius:50px;cursor:pointer;transition:.4s;}
+.btn:hover{background:var(--accent);color:#fff;box-shadow:0 0 20px var(--accent);}
 
 /* Sections */
-section{
-    padding:120px 10%;
-}
-
-.section-title{
-    font-size:38px;
-    margin-bottom:60px;
-    text-align:center;
-    opacity:0;
-    transform:translateY(30px);
-    animation:fadeIn 1s forwards;
-}
-
-.section-title span{
-    color:var(--accent);
-}
-
-/* About */
-.about{
-    max-width:800px;
-    margin:auto;
-    text-align:center;
-    line-height:1.8;
-    color:var(--muted);
-    opacity:0;
-    transform:translateY(30px);
-    animation:fadeIn 1s 0.5s forwards;
-}
-
-/* Skills */
-.skills{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:20px;
-}
-
-.skill-card{
-    background:var(--card);
-    padding:20px 40px;
-    border-radius:12px;
-    transition:.4s;
-    border:1px solid transparent;
-    opacity:0;
-    transform:translateY(30px);
-    animation:fadeIn 1s forwards;
-}
-
-.skill-card:hover{
-    border:1px solid var(--accent);
-    transform:translateY(-5px);
-}
-
-/* Projects */
-.projects{
-    display:flex;
-    flex-wrap:wrap;
-    gap:30px;
-    justify-content:center;
-}
-
-.project-card{
-    background:var(--card);
-    padding:30px;
-    border-radius:15px;
-    width:300px;
-    transition:.4s;
-    border:1px solid transparent;
-    opacity:0;
-    transform:translateY(30px);
-    animation:fadeIn 1s forwards;
-}
-
-.project-card h3{
-    margin-bottom:15px;
-}
-
-.project-card p{
-    color:var(--muted);
-}
-
-.project-card:hover{
-    transform:translateY(-10px);
-    border:1px solid var(--accent);
-}
-
-/* Footer */
-footer{
-    text-align:center;
-    padding:40px;
-    color:var(--muted);
-    border-top:1px solid #222;
-}
+section{padding:120px 10%;}
+.section-title{font-size:38px;margin-bottom:60px;text-align:center;}
+.section-title span{color:var(--accent);}
+.about{max-width:800px;margin:auto;text-align:center;line-height:1.8;color:var(--muted);}
+.skills{display:flex;justify-content:center;flex-wrap:wrap;gap:20px;}
+.skill-card{background:var(--card);padding:20px 40px;border-radius:12px;transition:.4s;border:1px solid transparent;}
+.skill-card:hover{border:1px solid var(--accent);transform:translateY(-5px);}
+.projects{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;}
+.project-card{background:var(--card);padding:30px;border-radius:15px;width:300px;transition:.4s;border:1px solid transparent;}
+.project-card h3{margin-bottom:15px;}
+.project-card p{color:var(--muted);}
+.project-card:hover{transform:translateY(-10px);border:1px solid var(--accent);}
+footer{text-align:center;padding:40px;color:var(--muted);border-top:1px solid #222;}
 
 /* Animations */
-@keyframes fadeIn{
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
+.fadeIn{opacity:0;transform:translateY(30px);animation:fadeIn 1s forwards;}
+header h1.fadeIn{animation-delay:.3s;}
+header p.fadeIn{animation-delay:.6s;}
+.btn.fadeIn{animation-delay:.9s;}
+.section-title.fadeIn{animation-delay:1.2s;}
+.about.fadeIn{animation-delay:1.5s;}
+.skill-card.fadeIn{animation-delay:1.8s;}
+.project-card.fadeIn{animation-delay:2s;}
+
+@keyframes fadeIn{to{opacity:1;transform:translateY(0);}}
+
+/* Typewriter effect */
+.typewriter-text{display:inline-block;overflow:hidden;border-right:.15em solid var(--accent);white-space:nowrap;animation:typing 3s steps(40, end),blink .7s step-end infinite;}
+@keyframes typing{from{width:0;}to{width:100%;}}
+@keyframes blink{50%{border-color:transparent;}}
+
+/* Admin Panel */
+#adminPanel{position:fixed;top:0;right:0;background:var(--card);padding:20px;border-radius:12px;display:none;flex-direction:column;width:300px;z-index:2000;}
+#adminPanel input,#adminPanel textarea{margin-bottom:10px;padding:8px;width:100%;border-radius:6px;border:1px solid #444;background:#222;color:#fff;}
+#adminPanel button{padding:10px;background:var(--accent);border:none;color:#fff;border-radius:6px;cursor:pointer;transition:.3s;}
+#adminPanel button:hover{background:#fff;color:var(--accent);}
 
 /* Responsive */
 @media(max-width:768px){
-    header h1{
-        font-size:40px;
-    }
-    header p{
-        font-size:16px;
-    }
-    nav ul{
-        display:none;
-    }
-    .skills, .projects{
-        flex-direction:column;
-        align-items:center;
-    }
-    .skill-card, .project-card{
-        width:90%;
-    }
-    .btn{
-        padding:12px 25px;
-        font-size:14px;
-    }
+  header h1{font-size:40px;}
+  header p{font-size:16px;}
+  nav ul{display:none;}
+  .skills,.projects{flex-direction:column;align-items:center;}
+  .skill-card,.project-card{width:90%;}
+  .btn{padding:12px 25px;font-size:14px;}
 }
 </style>
 </head>
-
-<body>
+<body class="dark-mode">
 
 <nav>
-    <h2>BANA<span></span></h2>
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-    </ul>
+  <h2>BANA<span></span></h2>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+  </ul>
+  <button class="toggle-btn" onclick="toggleMode()">🌓</button>
 </nav>
 
 <header>
-    <h1>Hi, I'm <span>BANA</span></h1>
-    <p>AI Engineer • Full Stack Developer • Problem Solver</p>
-    <a href="#projects"><button class="btn">View My Work</button></a>
+  <h1 class="fadeIn">Hi, I'm <span>BANA</span></h1>
+  <p class="fadeIn typewriter-text" id="typewriter">AI Engineer • Full Stack Developer • Problem Solver</p>
+  <button class="btn fadeIn" onclick="showAdminPanel()">Admin Panel</button>
 </header>
 
 <section id="about">
-    <h2 class="section-title">About <span>Me</span></h2>
-    <p class="about">
-        I design and build intelligent systems that solve real-world problems.
-        My focus is on clean architecture, scalable solutions, and impactful technology.
-    </p>
+  <h2 class="section-title fadeIn">About <span>Me</span></h2>
+  <p class="about fadeIn" id="aboutText">I design and build intelligent systems that solve real-world problems. My focus is on clean architecture, scalable solutions, and impactful technology.</p>
 </section>
 
 <section id="skills">
-    <h2 class="section-title">Skills</h2>
-    <div class="skills">
-        <div class="skill-card">Python</div>
-        <div class="skill-card">Machine Learning</div>
-        <div class="skill-card">Flutter</div>
-        <div class="skill-card">Web Development</div>
-        <div class="skill-card">Data Analysis</div>
-    </div>
+  <h2 class="section-title fadeIn">Skills</h2>
+  <div class="skills">
+    <div class="skill-card fadeIn">Python</div>
+    <div class="skill-card fadeIn">Machine Learning</div>
+    <div class="skill-card fadeIn">Flutter</div>
+    <div class="skill-card fadeIn">Web Development</div>
+    <div class="skill-card fadeIn">Data Analysis</div>
+  </div>
 </section>
 
 <section id="projects">
-    <h2 class="section-title">Selected <span>Projects</span></h2>
-    <div class="projects">
-        <div class="project-card">
-            <h3>Project One</h3>
-            <p>Short description about your project and its impact.</p>
-        </div>
-        <div class="project-card">
-            <h3>Project Two</h3>
-            <p>Short description about your project and its impact.</p>
-        </div>
-        <div class="project-card">
-            <h3>Project Three</h3>
-            <p>Short description about your project and its impact.</p>
-        </div>
+  <h2 class="section-title fadeIn">Selected <span>Projects</span></h2>
+  <div class="projects">
+    <div class="project-card fadeIn" id="project1">
+      <h3>Project One</h3>
+      <p>Short description about your project and its impact.</p>
     </div>
+    <div class="project-card fadeIn" id="project2">
+      <h3>Project Two</h3>
+      <p>Short description about your project and its impact.</p>
+    </div>
+    <div class="project-card fadeIn" id="project3">
+      <h3>Project Three</h3>
+      <p>Short description about your project and its impact.</p>
+    </div>
+  </div>
 </section>
 
 <footer>
-    © 2026 BANA — All Rights Reserved.
+  © 2026 BANA — All Rights Reserved.
 </footer>
+
+<!-- Admin Panel -->
+<div id="adminPanel">
+  <h3>Admin Panel</h3>
+  <input type="password" id="adminPass" placeholder="Enter Password">
+  <textarea id="editAbout" placeholder="Edit About Me"></textarea>
+  <textarea id="editProject1" placeholder="Edit Project 1"></textarea>
+  <textarea id="editProject2" placeholder="Edit Project 2"></textarea>
+  <textarea id="editProject3" placeholder="Edit Project 3"></textarea>
+  <button onclick="saveChanges()">Save Changes</button>
+</div>
+
+<script>
+// Dark/Light Mode
+function toggleMode(){
+  document.body.classList.toggle('light-mode');
+  document.body.classList.toggle('dark-mode');
+}
+
+// Admin Panel Logic
+function showAdminPanel(){
+  let pass = prompt("Enter Admin Password:");
+  if(pass === "bana123"){ // ضع الباسورد اللي تحبه
+    document.getElementById('adminPanel').style.display = 'flex';
+  } else {alert("Wrong Password!");}
+}
+
+function saveChanges(){
+  document.getElementById('aboutText').innerText = document.getElementById('editAbout').value;
+  document.getElementById('project1').querySelector('p').innerText = document.getElementById('editProject1').value;
+  document.getElementById('project2').querySelector('p').innerText = document.getElementById('editProject2').value;
+  document.getElementById('project3').querySelector('p').innerText = document.getElementById('editProject3').value;
+  alert("Changes Saved!");
+}
+
+// Typewriter effect for dynamic text
+let txts = ["AI Engineer • Full Stack Developer • Problem Solver","Designer • Coder • Innovator","BANA Portfolio"];
+let count = 0;
+let index = 0;
+let currentTxt = "";
+let letter = "";
+
+(function type(){
+  if(count === txts.length) count = 0;
+  currentTxt = txts[count];
+  letter = currentTxt.slice(0, ++index);
+  document.getElementById("typewriter").textContent = letter;
+  if(letter.length === currentTxt.length){
+    count++;
+    index = 0;
+    setTimeout(type,1000);
+  } else {
+    setTimeout(type,100);
+  }
+})();
+</script>
 
 </body>
 </html>
