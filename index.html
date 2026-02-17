@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Name | Portfolio</title>
+<title>BANA | Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
@@ -40,6 +40,7 @@ nav{
     background:rgba(0,0,0,0.6);
     backdrop-filter:blur(10px);
     z-index:1000;
+    border-bottom:1px solid #222;
 }
 
 nav h2{
@@ -82,9 +83,12 @@ header{
 header h1{
     font-size:64px;
     font-weight:800;
+    opacity:0;
+    transform:translateY(30px);
+    animation:fadeIn 1s forwards;
 }
 
-header span{
+header h1 span{
     color:var(--accent);
 }
 
@@ -92,6 +96,9 @@ header p{
     margin-top:20px;
     font-size:20px;
     color:var(--muted);
+    opacity:0;
+    transform:translateY(30px);
+    animation:fadeIn 1s 0.5s forwards;
 }
 
 .btn{
@@ -104,6 +111,9 @@ header p{
     cursor:pointer;
     border-radius:50px;
     transition:.4s;
+    opacity:0;
+    transform:translateY(30px);
+    animation:fadeIn 1s 0.9s forwards;
 }
 
 .btn:hover{
@@ -121,18 +131,25 @@ section{
     font-size:38px;
     margin-bottom:60px;
     text-align:center;
+    opacity:0;
+    transform:translateY(30px);
+    animation:fadeIn 1s forwards;
 }
 
 .section-title span{
     color:var(--accent);
 }
 
+/* About */
 .about{
     max-width:800px;
     margin:auto;
     text-align:center;
     line-height:1.8;
     color:var(--muted);
+    opacity:0;
+    transform:translateY(30px);
+    animation:fadeIn 1s 0.5s forwards;
 }
 
 /* Skills */
@@ -149,6 +166,9 @@ section{
     border-radius:12px;
     transition:.4s;
     border:1px solid transparent;
+    opacity:0;
+    transform:translateY(30px);
+    animation:fadeIn 1s forwards;
 }
 
 .skill-card:hover{
@@ -171,6 +191,9 @@ section{
     width:300px;
     transition:.4s;
     border:1px solid transparent;
+    opacity:0;
+    transform:translateY(30px);
+    animation:fadeIn 1s forwards;
 }
 
 .project-card h3{
@@ -195,20 +218,6 @@ footer{
 }
 
 /* Animations */
-header h1, header p, .btn, .section-title, .about, .skill-card, .project-card{
-    opacity:0;
-    transform:translateY(30px);
-    animation:fadeIn 1s forwards;
-}
-
-header h1{animation-delay:.3s;}
-header p{animation-delay:.6s;}
-.btn{animation-delay:.9s;}
-.section-title{animation-delay:1.2s;}
-.about{animation-delay:1.5s;}
-.skill-card{animation-delay:1.8s;}
-.project-card{animation-delay:2s;}
-
 @keyframes fadeIn{
     to{
         opacity:1;
@@ -221,8 +230,22 @@ header p{animation-delay:.6s;}
     header h1{
         font-size:40px;
     }
+    header p{
+        font-size:16px;
+    }
     nav ul{
         display:none;
+    }
+    .skills, .projects{
+        flex-direction:column;
+        align-items:center;
+    }
+    .skill-card, .project-card{
+        width:90%;
+    }
+    .btn{
+        padding:12px 25px;
+        font-size:14px;
     }
 }
 </style>
@@ -231,16 +254,17 @@ header p{animation-delay:.6s;}
 <body>
 
 <nav>
-    <h2>Your<span>Name</span></h2>
+    <h2>BANA<span></span></h2>
     <ul>
         <li><a href="#">Home</a></li>
         <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
     </ul>
 </nav>
 
 <header>
-    <h1>Hi, I'm <span>Your Name</span></h1>
+    <h1>Hi, I'm <span>BANA</span></h1>
     <p>AI Engineer • Full Stack Developer • Problem Solver</p>
     <a href="#projects"><button class="btn">View My Work</button></a>
 </header>
@@ -283,7 +307,7 @@ header p{animation-delay:.6s;}
 </section>
 
 <footer>
-    © 2026 Your Name — All Rights Reserved.
+    © 2026 BANA — All Rights Reserved.
 </footer>
 
 </body>
