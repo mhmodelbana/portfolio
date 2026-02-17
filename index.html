@@ -68,7 +68,7 @@ nav a:hover{color:var(--gold);}
 /* CART MODAL */
 #cartModal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center;z-index:5000;}
 #cartModal.active{display:flex;}
-.cart-content{background:var(--gray);padding:30px;border-radius:20px;width:90%;max-width:500px;max-height:80%;overflow-y:auto;}
+.cart-content{background:var(--gray);padding:30px;border-radius:20px;width:90%;max-width:550px;max-height:80%;overflow-y:auto;}
 .cart-content h3{text-align:center;margin-bottom:20px;}
 .cart-items{display:flex;flex-direction:column;gap:15px;margin-bottom:20px;}
 .cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(255,255,255,0.05);border-radius:15px;}
@@ -78,11 +78,12 @@ nav a:hover{color:var(--gold);}
 /* ORDER MODAL */
 #orderModal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center;z-index:6000;}
 #orderModal.active{display:flex;}
-.modal-content{background:var(--gray);padding:30px;border-radius:20px;width:90%;max-width:500px;}
+.modal-content{background:var(--gray);padding:30px;border-radius:20px;width:90%;max-width:550px;}
 .modal-content h3{text-align:center;margin-bottom:20px;}
 .modal-content label{display:block;margin:10px 0 5px;}
 .modal-content input, .modal-content textarea{width:100%;padding:10px;border-radius:10px;border:none;}
 .modal-content button{margin-top:15px;width:100%;padding:12px;background:var(--gold);color:black;font-weight:bold;border-radius:50px;cursor:pointer;}
+.invoice{background:#111;padding:15px;margin-top:10px;border-radius:15px;font-size:14px;line-height:1.5;}
 
 /* FOOTER */
 footer{background:black;padding:40px;text-align:center;margin-top:50px;}
@@ -97,7 +98,7 @@ footer{background:black;padding:40px;text-align:center;margin-top:50px;}
 </head>
 <body>
 
-<div class="loader"><div class="loader-logo">شركة البنا</div></div>
+<div class="loader"><div class="loader-logo"> شركة البنا لتوزيع المنتجات الغذائية </div></div>
 <div class="cursor"></div>
 
 <nav>
@@ -112,7 +113,7 @@ footer{background:black;padding:40px;text-align:center;margin-top:50px;}
 <section class="hero">
 <div class="hero-content">
 <h1>شركة البنا لتوزيع المنتجات الغذائية</h1>
-<p>توزيع سريع · منتجات أصلية · أسعار تنافسية</p>
+<p>توزيع سريع · بيع اجل · أسعار تنافسية</p>
 <a href="#products" class="btn">استعرض المنتجات</a>
 </div>
 </section>
@@ -160,7 +161,7 @@ footer{background:black;padding:40px;text-align:center;margin-top:50px;}
 <h3>سلة المشتريات</h3>
 <div class="cart-items" id="cartItems"></div>
 <div><strong>الإجمالي: </strong><span id="cartTotal">0</span> جنيه</div>
-<button id="checkoutBtn" class="btn">إرسال الطلب</button>
+<button id="checkoutBtn" class="btn">إدخال بيانات العميل</button>
 <button onclick="closeCart()" class="btn" style="background:red;margin-top:10px;">إغلاق السلة</button>
 </div>
 </div>
@@ -168,13 +169,14 @@ footer{background:black;padding:40px;text-align:center;margin-top:50px;}
 <!-- ORDER MODAL -->
 <div id="orderModal">
 <div class="modal-content">
-<h3>أدخل بياناتك</h3>
+<h3>أدخل بياناتك لإصدار الفاتورة</h3>
 <label>الاسم الكامل</label>
 <input type="text" id="customerName" placeholder="الاسم">
 <label>رقم الهاتف</label>
 <input type="text" id="customerPhone" placeholder="010XXXXXXX">
 <label>العنوان</label>
 <textarea id="customerAddress" placeholder="العنوان"></textarea>
+<div class="invoice" id="invoice"></div>
 <button id="confirmOrder" class="btn">تأكيد الطلب</button>
 <button onclick="closeOrder()" class="btn" style="background:red;margin-top:10px;">إغلاق</button>
 </div>
@@ -189,8 +191,11 @@ document.addEventListener("mousemove",(e)=>{document.querySelector(".cursor").st
 
 // Products Data
 const products=[
-{name:"كرتونة شيبسي بالملح",company:"شيبسي",price:20,available:true},
-{name:"كرتونة شيبسي بالخل",company:"شيبسي",price:22,available:true},
+{name:"كرتونة شيبسي بالملح",company:"شيبسي",price:5,available:true},
+{name:"كرتونة شيبسي بالجبنة المتبلة",company:"شيبسي",price:5,available:true},
+{name:"كرتونة شيبسي طاطم",company:"شيبسي",price:5,available:true},
+{name:"سناكس شيبسي",company:"شيبسي",price:10,available:true},
+{name:"دوريتوس شيبسي",company:"شيبسي",price:10,available:true},
 {name:"كرتونة لايون شوكولاتة",company:"لايون",price:18,available:true},
 {name:"كرتونة ويندوز بسكويت",company:"ويندوز",price:25,available:false},
 {name:"كرتونة سبشيال مكسرات",company:"اسبشيال",price:30,available:true},
@@ -273,7 +278,25 @@ checkoutBtn.addEventListener("click",()=>{
 if(cart.length===0){alert("سلة المشتريات فارغة");return;}
 orderModal.classList.add("active");
 cartModal.classList.remove("active");
+renderInvoice();
 });
+function closeOrder(){orderModal.classList.remove("active");}
+
+// Render Invoice
+function renderInvoice(){
+const name=document.getElementById("customerName").value||"---";
+const phone=document.getElementById("customerPhone").value||"---";
+const address=document.getElementById("customerAddress").value||"---";
+let invoice=`<strong>شركة البنا</strong><br>الاسم: ${name}<br>الهاتف: ${phone}<br>العنوان: ${address}<br><hr>المنتجات:<br>`;
+cart.forEach(item=>{
+invoice+=`${item.name} x ${item.quantity} = ${item.price*item.quantity} جنيه<br>`;
+});
+const total=cart.reduce((a,b)=>a+b.price*b.quantity,0);
+invoice+=`<hr>الإجمالي: <strong>${total} جنيه</strong>`;
+document.getElementById("invoice").innerHTML=invoice;
+}
+
+// Confirm Order
 document.getElementById("confirmOrder").addEventListener("click",()=>{
 const name=document.getElementById("customerName").value;
 const phone=document.getElementById("customerPhone").value;
@@ -288,7 +311,6 @@ orderModal.classList.remove("active");
 cart=[];
 updateCart();
 });
-function closeOrder(){orderModal.classList.remove("active");}
 
 // Counters
 document.querySelectorAll('.counter').forEach(counter=>{
